@@ -10,6 +10,7 @@ class Venta extends Model
     use HasFactory;
 
     protected $fillable = [
+        'rut',
         'nombre',
         'apellido',
         'boleta',

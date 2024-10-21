@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Certificado extends Model
 {
@@ -14,6 +15,8 @@ class Certificado extends Model
         'apellido',
         'rut',
         'codigo_curso',
+        'curso',
+        'tipo',
         'fecha_start',
         'fecha_end',
         'certificado',
@@ -31,4 +34,20 @@ class Certificado extends Model
     {
         return $this->belongsTo(Curso::class, 'curso_id');
     }
+
+     // codigo para formatear fechas al español en mi certificado.blade.php
+     public function getFechaIniFormateadaAttribute()
+     {
+         return Carbon::parse($this->fecha_ini)->locale('es')->isoFormat('D [de] MMMM [de] YYYY');
+     }
+ 
+     public function getFechaFinFormateadaAttribute()
+     {
+         return Carbon::parse($this->fecha_fin)->locale('es')->isoFormat('D [de] MMMM [de] YYYY');
+     }
+ 
+     public function getFechaOtorgadoFormateadaAttribute()
+     {
+         return Carbon::parse($this->fecha_otorgado)->locale('es')->isoFormat('D [de] MMMM [de] YYYY');
+     }
 }

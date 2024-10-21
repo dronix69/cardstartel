@@ -16,12 +16,15 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Actions\ExportAction;
-use Filament\Tables\Actions\ExportBulkAction;
+
 use Filament\Tables\Filters\Filter;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\Action;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
+
 
 class MatriculaResource extends Resource
 {
@@ -160,7 +163,6 @@ class MatriculaResource extends Resource
                     ->label('Imagen')
                     ->square(),
                 Tables\Columns\TextColumn::make('codigo')
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nombre')
                     ->sortable()
@@ -172,13 +174,10 @@ class MatriculaResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('correo')
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('telefono')
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('edad')
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('fecha_matricula')
                     ->date()
@@ -187,13 +186,10 @@ class MatriculaResource extends Resource
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('direccion')
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('comuna')
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nivel')
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('licencia_actual')
                     ->badge()
@@ -274,7 +270,7 @@ class MatriculaResource extends Resource
 
 
                      // Boton para exportar en excel
-                ExportBulkAction::make()->exporter(MatriculaExporter::class)   
+                ExportBulkAction::make()   
                 ]),
             ]);
     }

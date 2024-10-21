@@ -14,16 +14,14 @@ return new class extends Migration
         Schema::create('certificados', function (Blueprint $table) {
             $table->id();
             $table->string('rut');
-            $table->unsignedBigInteger('matricula_id');
-            $table->foreign('matricula_id')->references('id')->on('matriculas');
-
+        
             $table->string('nombre');
             $table->string('apellido');
 
             $table->string('codigo_curso');
             $table->foreignId('curso_id')->constrained('cursos');
-
-            
+            $table->string('curso');
+            $table->string('tipo');
             $table->date('fecha_start');
             $table->date('fecha_end');
             $table->string('certificado');

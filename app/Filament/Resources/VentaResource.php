@@ -24,7 +24,9 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Actions\ExportAction;
-use Filament\Tables\Actions\ExportBulkAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
+
 
 class VentaResource extends Resource
 {
@@ -173,11 +175,11 @@ class VentaResource extends Resource
                 Tables\Columns\TextColumn::make('cuota')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        '1' => 'warning',
+                        '1' => 'success',
                         '2' => 'danger',
-                        '3' => 'success',
-                        '4' => 'primary',
-                        '5' => 'info',
+                        '3' => 'warning',
+                        '4' => 'warning',
+                        '5' => 'warning',
                     }),
                 Tables\Columns\TextColumn::make('valor')
                     ->label('Valor del Curso')
@@ -226,7 +228,7 @@ class VentaResource extends Resource
 
 
                      // Boton para exportar en excel
-                ExportBulkAction::make()->exporter(VentaExporter::class) 
+                ExportBulkAction::make()
                 ]),
             ]);
     }

@@ -18,6 +18,8 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Rmsramos\SystemInfo\SystemInfoPlugin;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -35,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->databaseNotifications()
+            ->databaseNotificationsPolling('30s')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -61,10 +64,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+
             ])
             ->plugins([
                 SystemInfoPlugin::make()
                     ->setSort(2),
+
+                FilamentFullCalendarPlugin::make()
+                    ->selectable()
+                    ->editable()    
             ]);
     }
 }
