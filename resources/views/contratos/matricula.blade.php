@@ -142,13 +142,13 @@
         }
 
         .bita {
-            width: 100%;
+            width: 90%;
             height: auto;
         }
 
         .edward {
-            width: 90%;
-            height: 80%;
+            width: 80%;
+            height: 70%;
         }
 
         section {

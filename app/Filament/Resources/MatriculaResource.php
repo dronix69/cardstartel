@@ -21,8 +21,12 @@ use Filament\Tables\Filters\Filter;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Filament\Forms\Components\Select;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\Action;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\Section;
 
 
 
@@ -214,6 +218,8 @@ class MatriculaResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+
+            
             ->filters([
                 Filter::make('fecha_matricula')
                 ->form([
@@ -232,6 +238,8 @@ class MatriculaResource extends Resource
                         );
                 })
             ])
+
+
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
@@ -274,6 +282,40 @@ class MatriculaResource extends Resource
                 ]),
             ]);
     }
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make('Información del Alumno')
+                ->schema([
+                    TextEntry::make('codigo')->label('Codigo'),
+                    TextEntry::make('nombre')->label('Nombre'),
+                    TextEntry::make('apellido')->label('Apellido'),
+                    TextEntry::make('rut')
+                        ->label('Rut')
+                        ->numeric(),
+                    TextEntry::make('correo')->label('Email'),
+                    TextEntry::make('telefono')->label('Telefono'),
+                    TextEntry::make('edad')->label('Edad'),
+                    TextEntry::make('fecha_matricula')
+                        ->label('Fecha Matricula')
+                        ->date(),
+                    TextEntry::make('fecha_nacimiento')
+                        ->label('Fecha Nacimiento')
+                        ->date(),
+                    TextEntry::make('direccion')->label('Dirección'),
+                    TextEntry::make('comuna')->label('Comuna'),
+                    TextEntry::make('nivel')->label('Nivel de Escolaridad'),
+                    TextEntry::make('licencia_actual')
+                        ->label('Licencia Actual')
+                        ->badge(),
+                    TextEntry::make('curso.codigo')
+                        ->label('Curso')
+                        ->badge(),
+                ])->columns(2)
+            ]);
+    }
+
 
     public static function getRelations(): array
     {
